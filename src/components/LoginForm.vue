@@ -11,7 +11,6 @@
       <button type="submit" :disabled="loading">Submit</button>
       <p></p>
       <span v-if="error">{{ error }}</span>
-      <span v-if="loggedUser">{{ loggedUser }}</span>
       <p></p>
     </form>
   </div>
@@ -20,8 +19,8 @@
 <script>
 import axios from 'axios';
 
-// Server CORS
-const API = 'https://localhost:5001';
+// Client Proxy
+const API = '';
 
 export default {
   name: 'LoginForm',
@@ -47,10 +46,12 @@ export default {
     onSubmit() {
       this.loading = true;
 
-      axios.post(`${API}/api/login`, {
+      const body = () => ({
         username: this.username,
         password: this.password,
-      }).then((response) => {
+      });
+
+      const processResponse = (response) => {
         this.loading = false;
 
         if (response.data.success) {
@@ -58,7 +59,14 @@ export default {
         } else {
           this.error = 'Incorrect username/password';
         }
-      });
+      };
+
+      const error = e => console.log(e);
+
+      axios
+        .post(`${API}/api/login`, body())
+        .then(processResponse)
+        .catch(error);
     },
   },
 };
