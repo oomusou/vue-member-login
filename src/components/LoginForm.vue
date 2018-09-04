@@ -21,9 +21,8 @@
 import axios from 'axios';
 
 // Server CORS
-// const API = 'https://localhost:5001';
-// http-proxy-middleware CORS
-const API = '';
+const API = 'https://localhost:5001';
+
 export default {
   name: 'LoginForm',
   data() {
