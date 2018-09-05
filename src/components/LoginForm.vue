@@ -18,9 +18,7 @@
 
 <script>
 import axios from 'axios';
-
-// Client Proxy
-const API = '';
+import { API } from '../environment';
 
 export default {
   name: 'LoginForm',
