@@ -49,11 +49,11 @@ export default {
         password: this.password,
       });
 
-      const processResponse = (response) => {
+      const response = (res) => {
         this.loading = false;
 
-        if (response.data.success) {
-          this.loggedUser = response.data.username;
+        if (res.data.success) {
+          this.loggedUser = res.data.username;
         } else {
           this.error = 'Incorrect username/password';
         }
@@ -63,7 +63,7 @@ export default {
 
       axios
         .post(`${API}/api/login`, body())
-        .then(processResponse)
+        .then(response)
         .catch(error);
     },
   },
