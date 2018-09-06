@@ -44,6 +44,8 @@ export default {
     onSubmit() {
       this.loading = true;
 
+      const endpoint = `${API}/api/login`;
+
       const body = () => ({
         username: this.username,
         password: this.password,
@@ -62,7 +64,7 @@ export default {
       const error = e => console.log(e);
 
       axios
-        .post(`${API}/api/login`, body())
+        .post(endpoint, body())
         .then(response)
         .catch(error);
     },
